@@ -1,0 +1,73 @@
+﻿Dev Backend
+A pessoa Desenvolvedora Backend é responsável por liderar a criação de soluções escaláveis e tecnicamente complexas, tomando decisões estratégicas de arquitetura. Ela promove o crescimento da equipe, compartilhando conhecimento e boas práticas de desenvolvimento, garantindo a qualidade do código e a eficiência do sistema.
+
+
+O que é esperado do case:
+Uso de Abstrações Simples e Eficientes: Entrega de soluções que utilizem frameworks, bibliotecas e linguagens de forma eficaz, priorizando a clareza e a simplicidade, conforme o nível de familiaridade.
+Capacidade de Explicar a Solução: Apresentação das escolhas técnicas de maneira clara, com justificativas diretas e objetivas, demonstrando entendimento do que foi implementado e capacidade de defender as abordagens escolhidas.
+	
+
+Case: Desenvolvimento Backend - JOTA
+O JOTA busca expandir sua plataforma digital, garantindo escalabilidade, segurança e eficiência no processamento de dados. O objetivo deste case é avaliar sua capacidade de desenvolver uma solução backend utilizando Django/Python, seguindo boas práticas de arquitetura, testes e integração com APIs
+Objetivo
+Desenvolver uma API RESTful para gestão de notícias, contemplando autenticação e diferentes perfis de usuário. A solução deve ser escalável e eficiente, utilizando filas ou eventos para processamento assíncrono, além de seguir padrões modernos de desenvolvimento backend.
+Requisitos
+1. Estrutura da API
+* Desenvolver uma API REST utilizando Django e Django REST Framework.
+* Criar endpoints para CRUD de notícias, com os seguintes atributos mínimos:
+   * Título
+   * Subtítulo
+   * Imagem (upload)
+   * Conteúdo
+   * Data de publicação
+   * Autor
+   * Status (rascunho ou publicado)
+* Definições de status:
+   * Rascunho: Notícia salva por um editor, mas ainda não publicada.
+   * Publicada: Notícia disponível para leitura.
+* Funcionalidades adicionais:
+   * Permitir o agendamento de publicações.
+   * Categorizar notícias dentro das verticais: Poder, Tributos, Saúde, Energia e Trabalhista.
+   * Definir se uma notícia será acessível a todos os leitores ou restrita a clientes PRO.
+   * Definir a relação do cliente com o plano x Vertical. 
+* Documentação da API: Implementação com Swagger.
+2. Autenticação e Perfis de Usuário
+* Implementar autenticação baseada em JWT para controle de acesso.
+* Criar endpoints para:
+   * Geração e renovação de tokens JWT.
+   * Gerenciamento de usuários conforme os perfis abaixo:
+      * Admin: Acesso total (criação, edição, exclusão e gerenciamento de usuários).
+      * Editor: Pode criar, editar e excluir apenas suas próprias notícias.
+      * Leitor: Pode visualizar apenas notícias publicadas, conforme o plano contratado.
+* Um leitor terá acesso ao conteúdo conforme o plano contratado:
+   * JOTA Info: Pode acessar notícias abertas para todos os usuários.
+   * JOTA PRO: Tem acesso a conteúdos exclusivos de acordo com as verticais disponíveis no plano.
+* As verticais disponíveis são: Poder, Tributos, Saúde, Energia e Trabalhista.
+* Um plano pode incluir acesso a uma ou mais verticais.
+3. Banco de Dados
+* Utilização de PostgreSQL ou MySQL.
+* Conhecimento básico em bancos NoSQL será considerado um diferencial.
+4. Arquitetura e Processamento Assíncrono
+* Implementar fila de processamento para tarefas demoradas (ex.: envio de e-mails de notificação).
+* Utilizar arquitetura orientada a eventos para escalabilidade e desacoplamento dos serviços.
+* Conhecimento em microsserviços será um diferencial.
+5. Testes Automatizados e CI/CD
+* Implementar testes unitários e de integração (pytest ou unittest) para garantir confiabilidade.
+* Configurar um pipeline CI/CD com GitHub Actions para execução automática dos testes e deploy.
+* Experiência com metodologias ágeis e integração/entrega contínua será um diferencial.
+6. Infraestrutura e Deploy
+* Criar um Dockerfile e um docker-compose.yml para facilitar a execução local.
+________________
+
+
+Instruções de Envio
+1. Disponibilize o código-fonte em um repositório público.
+2. Inclua um README com instruções para rodar o projeto localmente.
+3. O candidato apresentará a solução funcionando em uma conversa, explicando a lógica e os desafios enfrentados.
+________________
+
+
+Dicas
+💡 Demonstre sua lógica e abordagem: Queremos entender seu raciocínio. Evite apenas copiar soluções sem compreender como funcionam.
+🚀 Priorize um MVP funcional: Foque no essencial! Entregue uma solução eficiente com as principais funcionalidades funcionando bem. Sinta-se à vontade para criar novos endpoints, revisar e aprimorar os requisitos conforme necessário. 
+🛠 Explique suas escolhas: Durante a apresentação, discutiremos suas decisões e possíveis melhorias.
