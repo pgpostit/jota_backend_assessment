@@ -27,8 +27,8 @@ class Category(BaseModel):
 
 class News(BaseModel):
     STATUS_OPTIONS = [
-        ("draft", "Rascunho"),
-        ("published", "Publicado"),
+        ("draft", "Draft"),
+        ("published", "Published"),
     ]
 
     title = models.CharField(max_length=255)

@@ -108,6 +108,30 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT authentication. Use the format: Bearer <your_token>",
+        }
+    },
+    "USE_SESSION_AUTH": False,
+}
+
+TEST_RUNNER = "pytest_django.runner.PytestTestRunner"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
