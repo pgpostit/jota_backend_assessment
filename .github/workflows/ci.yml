@@ -42,6 +42,7 @@ jobs:
 
       - name: Install dependencies
         run: poetry install --no-root
+        working-directory: jota_backend_assessment
 
       - name: Run Migrations
         env:
@@ -51,7 +52,7 @@ jobs:
           POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
           POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
         run: |
-          python manage.py migrate
+          poetry run python manage.py migrate
         working-directory: jota_backend_assessment
 
       - name: Run Tests
