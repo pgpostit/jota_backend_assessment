@@ -52,6 +52,8 @@ jobs:
           POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
         run: |
           python manage.py migrate
+        working-directory: jota_backend_assessment
 
       - name: Run Tests
         run: poetry run pytest --disable-warnings
+        working-directory: jota_backend_assessment
