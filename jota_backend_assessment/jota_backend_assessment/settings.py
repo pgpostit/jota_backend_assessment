@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -82,12 +82,35 @@ WSGI_APPLICATION = "jota_backend_assessment.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+if all(
+    [
+        os.getenv("POSTGRES_DB"),
+        os.getenv("POSTGRES_USER"),
+        os.getenv("POSTGRES_PASSWORD"),
+        os.getenv("POSTGRES_HOST"),
+        os.getenv("POSTGRES_PORT"),
+    ]
+):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("POSTGRES_DB", "jota_news"),
+            "USER": os.getenv("POSTGRES_USER", "jota_user"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD", "jota123"),
+            "HOST": os.getenv("POSTGRES_HOST", "localhost"),
+            "PORT": os.getenv("POSTGRES_PORT", "5432"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # Password validation
