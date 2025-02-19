@@ -1,0 +1,76 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: jota_postgres
+    environment:
+      POSTGRES_DB: jota_news
+      POSTGRES_USER: jota_user
+      POSTGRES_PASSWORD: jota123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: jota_backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      POSTGRES_DB: jota_news
+      POSTGRES_USER: jota_user
+      POSTGRES_PASSWORD: jota123
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+    links:
+      - db
+
+  celery:
+    build: .
+    container_name: jota_celery
+    command: celery -A jota_backend_assessment worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    environment:
+      POSTGRES_DB: jota_news
+      POSTGRES_USER: jota_user
+      POSTGRES_PASSWORD: jota123
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+
+  celery-beat:
+    build: .
+    container_name: jota_celery_beat
+    command: celery -A jota_backend_assessment beat --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    environment:
+      POSTGRES_DB: jota_news
+      POSTGRES_USER: jota_user
+      POSTGRES_PASSWORD: jota123
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    container_name: jota_swagger
+    environment:
+      SWAGGER_JSON: /app/swagger.json
+    volumes:
+      - ./swagger.json:/app/swagger.json
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
